@@ -4,6 +4,7 @@ Checks: >
   clang-analyzer-*,
   performance-*,
   portability-*,
+  -portability-avoid-pragma-once,
   readability-avoid-const-params-in-decls,
   readability-container-size-empty,
   readability-duplicate-include,

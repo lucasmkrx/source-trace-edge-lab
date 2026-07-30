@@ -1,0 +1,27 @@
+{
+  "protocolVersion": 1,
+  "unsignedTelemetry": {
+    "description": "Unsigned telemetry frame used to verify C++ and TypeScript encoders",
+    "deviceIdHex": "000102030405060708090a0b0c0d0e0f",
+    "sequence": 1,
+    "monotonicMs": 2,
+    "payload": {
+      "eventId": "evt-1",
+      "health": "nominal",
+      "mode": "idle",
+      "occupied": false,
+      "queueDepth": 0
+    },
+    "payloadUtf8": "{\"eventId\":\"evt-1\",\"health\":\"nominal\",\"mode\":\"idle\",\"occupied\":false,\"queueDepth\":0}",
+    "bodyLength": 132,
+    "totalBytes": 136,
+    "crc32Hex": "06125e47",
+    "frameHex": "000000845354012c04000000000102030405060708090a0b0c0d0e0f00000000000000010000000000000002000000547b226576656e744964223a226576742d31222c226865616c7468223a226e6f6d696e616c222c226d6f6465223a2269646c65222c226f63637570696564223a66616c73652c2271756575654465707468223a307d06125e47"
+  },
+  "malformed": {
+    "oversizedLengthPrefixHex": "00002000",
+    "oversizedLengthError": "invalid_length",
+    "payloadLengthOverflowHex": "ffffffff",
+    "payloadLengthOverflowError": "invalid_length"
+  }
+}

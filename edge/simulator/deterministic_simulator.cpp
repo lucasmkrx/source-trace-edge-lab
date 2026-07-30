@@ -20,7 +20,7 @@ void SimulatedHardware::schedule(core::Event event) {
       [](const std::uint64_t at_ms, const core::Event &candidate) {
         return at_ms < candidate.at_ms;
       });
-  events_.insert(position, std::move(event));
+  events_.insert(position, event);
 }
 
 std::optional<core::Event> SimulatedHardware::poll() {

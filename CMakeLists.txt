@@ -18,8 +18,16 @@ option(SOURCETRACE_ENABLE_CLANG_TIDY "Run clang-tidy during compilation" OFF)
 
 if(SOURCETRACE_ENABLE_CLANG_TIDY)
   find_program(CLANG_TIDY_EXE NAMES clang-tidy REQUIRED)
-  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+  set(SOURCETRACE_CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
 endif()
+
+function(sourcetrace_enable_project_tidy target)
+  if(SOURCETRACE_ENABLE_CLANG_TIDY)
+    set_property(
+      TARGET "${target}" PROPERTY CXX_CLANG_TIDY "${SOURCETRACE_CLANG_TIDY_COMMAND}"
+    )
+  endif()
+endfunction()
 
 include(CTest)
 add_subdirectory(edge)

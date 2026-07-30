@@ -28,7 +28,7 @@ enum class Indicator : std::uint8_t {
   fault,
 };
 
-enum class AuditCode : std::uint16_t {
+enum class AuditCode : std::uint8_t {
   boot_completed,
   configuration_accepted,
   occupancy_changed,
