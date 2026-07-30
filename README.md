@@ -13,6 +13,10 @@ The dependency-free reviewer showcase under `showcase/` presents the verified
 architecture, 15-step recovery trace, normative frame decoder, and explicit
 human/AI decision history without exposing any runtime service.
 
+The public deployment is intentionally static. Its configuration deploys only
+`showcase/public/`; the controller, worker, database, fixtures, and credentials
+remain source or local test artifacts.
+
 ## Verified snapshot
 
 The implementation was verified locally on 2026-07-30:
@@ -106,7 +110,9 @@ python3.13 -m venv .venv
 ```
 
 The complete repeatable command list and optional deep checks are in
-[the local verification runbook](docs/runbooks/local-verification.md).
+[the local verification runbook](docs/runbooks/local-verification.md). Static
+hosting and rollback are documented in [the deployment
+runbook](docs/runbooks/deployment.md).
 
 ## Three reviewer demonstrations
 
@@ -141,13 +147,11 @@ replacement, database replacement, key lifecycle, secure boot, hardware
 attestation, and a production-grade hostile-document sandbox are outside scope.
 Read [SECURITY.md](SECURITY.md) and [known limitations](docs/known-limitations.md).
 
-This directory currently lives as `source-trace-edge-lab/` inside the private
-`tatiana` repository. The subtree is reviewable locally, but the parent
-repository contains private/product-specific material and is **not suitable for
-publication**. A future public release must extract and rescan only this
-subtree into a clean repository by following the [publication
-checklist](docs/runbooks/publication-checklist.md). Nothing has been pushed,
-deployed, or published by this work.
+The public history is extracted from the approved lab subtree only. The
+enclosing private product repository remains outside the security and
+publication boundary. Release work must follow the [publication
+checklist](docs/runbooks/publication-checklist.md) and [deployment
+runbook](docs/runbooks/deployment.md).
 
 ## License
 

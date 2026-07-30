@@ -8,17 +8,18 @@ people, property, credentials, or safety-critical operations.
 
 ## Reporting a vulnerability
 
-Until a public repository and security contact are approved, report potential
-vulnerabilities privately to the repository owner. Do not include secrets,
-personal data, or copyrighted documents in a report.
+Use the public repository's **Report a vulnerability** flow to send the
+maintainer a private security advisory. Do not open a public issue for an
+unfixed vulnerability, and do not include real secrets, personal data, or
+copyrighted documents in a report.
 
-A future public release must replace this paragraph with an approved contact and
-response expectation.
+The maintainer will acknowledge a report within seven calendar days. This is a
+portfolio project without a production security service-level agreement.
 
 ## Supported versions
 
-Only the current local `codex/source-trace-edge-lab` development branch is
-considered for this snapshot. No published version is currently supported.
+Only the current `main` branch is considered for this prototype. No release is
+supported for production use.
 
 ## Security boundaries
 
@@ -28,5 +29,5 @@ considered for this snapshot. No published version is currently supported.
 - A privileged local user can modify the controller database and executable.
 - The PDF worker is defense-in-depth demonstration code, not a complete
   hostile-document sandbox.
-- The enclosing `tatiana` repository is outside the lab's security and
-  publication boundary.
+- The static public site serves documentation only and exposes no controller,
+  ingestion, database, or administration endpoint.
