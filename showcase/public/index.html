@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SourceTrace Edge Lab — deterministic C++20 control, authenticated binary protocol, durable recovery, and transparent AI co-working evidence."
+    />
+    <meta name="theme-color" content="#071a19" />
+    <title>SourceTrace Edge Lab — Systems Engineering Evidence</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to evidence</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="SourceTrace Edge Lab home">
+        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span>SourceTrace <strong>Edge Lab</strong></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#architecture">Architecture</a>
+        <a href="#proof">Proof</a>
+        <a href="#protocol">Protocol</a>
+        <a href="#collaboration">AI co-working</a>
+      </nav>
+      <a
+        class="button button-small button-ghost"
+        href="https://github.com/lucasmkrx/source-trace-edge-lab"
+      >
+        View source
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="status-dot"></span> Verified local systems prototype</p>
+            <h1>Failure is an input.<br /><span>Recovery is a design.</span></h1>
+            <p class="hero-summary">
+              A deterministic C++20 edge controller with bounded binary parsing,
+              Ed25519 command authentication, transactional offline recovery, and
+              executable evidence for every important claim.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#proof">Run the evidence trace</a>
+              <a class="button button-secondary" href="#collaboration">
+                Inspect the decisions
+              </a>
+            </div>
+            <p class="evidence-note">
+              Portfolio prototype · no production credentials · no cloud control plane
+            </p>
+          </div>
+          <div class="terminal-card" aria-label="Verified scenario summary">
+            <div class="terminal-bar">
+              <span></span><span></span><span></span>
+              <code>diagnostics / verified-run</code>
+            </div>
+            <div class="terminal-body">
+              <p><span class="prompt">$</span> npm run scenario</p>
+              <p class="terminal-muted">spawning build/dev/edge/sourcetrace_sim</p>
+              <p><span class="terminal-ok">✓</span> durable restart reconstructed</p>
+              <p><span class="terminal-ok">✓</span> duplicate acknowledged, no effect</p>
+              <p><span class="terminal-warn">!</span> sequence conflict rejected</p>
+              <p><span class="terminal-warn">!</span> corrupt CRC rejected</p>
+              <p><span class="terminal-ok">✓</span> lost ACK recovered idempotently</p>
+              <div class="terminal-result">
+                <span>15 steps passed</span>
+                <span>queue 0</span>
+                <span>effects 6</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics" aria-label="Observed verification results">
+          <article>
+            <strong>33 / 33</strong>
+            <span>C++ behavioral tests</span>
+          </article>
+          <article>
+            <strong>50,000</strong>
+            <span>seeded fuzz runs</span>
+          </article>
+          <article>
+            <strong>14 / 14</strong>
+            <span>PDF boundary tests</span>
+          </article>
+          <article>
+            <strong>7 / 7</strong>
+            <span>cross-language tests</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section-heading">
+          <p class="eyebrow">Separation before sophistication</p>
+          <h2>A small system with hard boundaries</h2>
+          <p>
+            Policy is pure. Effects are explicit. Authentication precedes
+            interpretation. Durable state advances atomically.
+          </p>
+        </div>
+
+        <div class="architecture-map" role="img" aria-label="System architecture layers">
+          <div class="arch-inputs">
+            <span>Occupancy</span>
+            <span>Physical button</span>
+            <span>Connectivity</span>
+            <span>Signed input</span>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">↓</div>
+          <div class="arch-row">
+            <article class="arch-card accent-mint">
+              <small>01 · TRUST BOUNDARY</small>
+              <h3>Bounded protocol</h3>
+              <p>Fixed 4,212-byte frame. Length → CRC32 → Ed25519 → JSON schema.</p>
+            </article>
+            <article class="arch-card accent-gold">
+              <small>02 · DOMAIN</small>
+              <h3>Pure reducer</h3>
+              <p>Explicit state + event → next state + requested effects. No I/O.</p>
+            </article>
+            <article class="arch-card accent-coral">
+              <small>03 · ACCEPTANCE</small>
+              <h3>Runtime coordinator</h3>
+              <p>Checkpoint, replay state, audit, sequence, and queue in one commit.</p>
+            </article>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">↓</div>
+          <div class="arch-outputs">
+            <span>SQLite durability</span>
+            <span>At-least-once transport</span>
+            <span>Hardware indicator</span>
+            <span>Append-only audit</span>
+          </div>
+        </div>
+
+        <div class="principles">
+          <article>
+            <span class="principle-number">01</span>
+            <h3>CRC is not identity</h3>
+            <p>
+              CRC32 rejects accidental corruption. Ed25519 authenticates protected
+              commands. The implementation and documentation never conflate them.
+            </p>
+          </article>
+          <article>
+            <span class="principle-number">02</span>
+            <h3>Replay is durable state</h3>
+            <p>
+              The high-water sequence and accepted signature commit with domain
+              effects, so a failed transaction cannot consume a valid command.
+            </p>
+          </article>
+          <article>
+            <span class="principle-number">03</span>
+            <h3>At least once, honestly</h3>
+            <p>
+              Lost local acknowledgement may retransmit. Stable event IDs preserve
+              receiver effects without making an exactly-once claim.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section proof-section" id="proof">
+        <div class="section-heading heading-row">
+          <div>
+            <p class="eyebrow">Executable recovery story</p>
+            <h2>Replay the verified 15-step trace</h2>
+          </div>
+          <div class="proof-controls">
+            <button class="button button-primary" id="run-scenario" type="button">
+              Run recorded trace
+            </button>
+            <button class="button button-ghost" id="reset-scenario" type="button">
+              Reset
+            </button>
+          </div>
+        </div>
+        <p class="trace-disclosure">
+          This browser visualization replays checked-in integration evidence. The
+          actual test spawns and asserts against the compiled C++ process.
+        </p>
+
+        <div class="proof-layout">
+          <div class="state-panel">
+            <div class="state-header">
+              <span>Controller state</span>
+              <span class="state-sequence" id="step-counter">step 0 / 15</span>
+            </div>
+            <div class="state-mode">
+              <span class="state-indicator" id="state-indicator"></span>
+              <div>
+                <small>MODE</small>
+                <strong id="state-mode">booting</strong>
+              </div>
+            </div>
+            <dl class="state-grid">
+              <div><dt>Health</dt><dd id="state-health">network_degraded</dd></div>
+              <div><dt>Connected</dt><dd id="state-connected">false</dd></div>
+              <div><dt>Queue</dt><dd id="state-queue">0 records</dd></div>
+              <div><dt>Receiver effects</dt><dd id="state-effects">0</dd></div>
+            </dl>
+            <div class="state-outcome" id="state-outcome">Ready to replay evidence.</div>
+          </div>
+          <ol class="trace-list" id="trace-list" aria-live="polite"></ol>
+        </div>
+      </section>
+
+      <section class="section protocol-section" id="protocol">
+        <div class="section-heading">
+          <p class="eyebrow">Byte-level inspectability</p>
+          <h2>Decode the normative frame</h2>
+          <p>
+            Paste bounded hexadecimal or load the checked-in C++/TypeScript golden
+            vector. The browser decoder is explanatory and makes no trust decision.
+          </p>
+        </div>
+        <div class="protocol-tool">
+          <div class="protocol-input">
+            <label for="frame-hex">Frame hexadecimal</label>
+            <textarea id="frame-hex" spellcheck="false" rows="9"></textarea>
+            <div class="protocol-actions">
+              <button class="button button-primary" id="decode-frame" type="button">
+                Decode frame
+              </button>
+              <button class="button button-ghost" id="corrupt-frame" type="button">
+                Flip CRC bit
+              </button>
+            </div>
+          </div>
+          <div class="protocol-output" id="protocol-output" aria-live="polite">
+            <p class="output-placeholder">Select “Decode frame” to inspect the envelope.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section collaboration-section" id="collaboration">
+        <div class="section-heading">
+          <p class="eyebrow">AI co-working, made reviewable</p>
+          <h2>Prompts did not become trust</h2>
+          <p>
+            Each focused commit records the human constraint, Codex contribution,
+            observed command results, corrections, and residual risk.
+          </p>
+        </div>
+
+        <div class="collaboration-grid">
+          <article class="role-card human-card">
+            <small>HUMAN DIRECTION</small>
+            <h3>Scope, judgment, acceptance</h3>
+            <ul>
+              <li>Rejected a broad 28–45 day platform proposal</li>
+              <li>Centered executable C++ systems evidence</li>
+              <li>Required truthful CRC and delivery semantics</li>
+              <li>Kept domain policy independent from adapters</li>
+              <li>Required behavioral proof before claims</li>
+            </ul>
+          </article>
+          <article class="role-card ai-card">
+            <small>CODEX CONTRIBUTION</small>
+            <h3>Implementation, adversarial review, iteration</h3>
+            <ul>
+              <li>Implemented the seven focused engineering phases</li>
+              <li>Built malformed-input and failure-path suites</li>
+              <li>Diagnosed parser, subprocess, and container failures</li>
+              <li>Recorded modified and rejected suggestions</li>
+              <li>Mapped every headline claim to observed evidence</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="decision-timeline">
+          <article>
+            <span>Human correction</span>
+            <h3>Platform breadth → systems depth</h3>
+            <p>
+              React, Firebase product work, Electron, and cloud deployment were
+              removed from the MVP so parser, persistence, and recovery evidence
+              could remain first-class.
+            </p>
+          </article>
+          <article>
+            <span>Behavioral correction</span>
+            <h3>Async subprocess → explicit lifecycle</h3>
+            <p>
+              Deadline tests exposed child-watcher stalling. The worker moved to
+              explicit Popen, cancellation kill, and guaranteed reap.
+            </p>
+          </article>
+          <article>
+            <span>Security correction</span>
+            <h3>Package failure → verified alternative</h3>
+            <p>
+              A failed Debian signature path was not bypassed. The container moved
+              to a digest-pinned Alpine base with signed packages.
+            </p>
+          </article>
+          <article>
+            <span>Evidence correction</span>
+            <h3>Assumption → real runtime behavior</h3>
+            <p>
+              The diagnostic scenario corrected an assertion after the C++ runtime
+              proved a connectivity event committed before an injected ACK failure.
+            </p>
+          </article>
+        </div>
+
+        <div class="evidence-links">
+          <a href="https://github.com/lucasmkrx/source-trace-edge-lab/blob/main/docs/reviewer-tour.md">
+            Reviewer code tour <span>↗</span>
+          </a>
+          <a href="https://github.com/lucasmkrx/source-trace-edge-lab/blob/main/docs/ai/verification-matrix.md">
+            Verification matrix <span>↗</span>
+          </a>
+          <a href="https://github.com/lucasmkrx/source-trace-edge-lab/tree/main/docs/ai/sessions">
+            AI session records <span>↗</span>
+          </a>
+          <a href="https://github.com/lucasmkrx/source-trace-edge-lab/blob/main/docs/security/threat-model.md">
+            Threat model <span>↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section limits-section">
+        <div>
+          <p class="eyebrow">The boundary is part of the design</p>
+          <h2>Prototype, not production theater.</h2>
+        </div>
+        <p>
+          No key lifecycle, confidentiality, secure element, hardware attestation,
+          distributed consensus, or hostile-document sandbox is claimed. The public
+          deployment serves this static reviewer experience only—no simulator,
+          ingestion worker, database, credential, or administrative endpoint.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span>SourceTrace Edge Lab</span>
+      </div>
+      <p>Built as executable evidence of systems engineering and transparent AI co-working.</p>
+      <a href="https://github.com/lucasmkrx/source-trace-edge-lab">Apache-2.0 · Source</a>
+    </footer>
+  </body>
+</html>

@@ -9,6 +9,10 @@ TypeScript diagnostic console.
 It is executable engineering evidence, not a production device, safety system,
 election system, or certified security product.
 
+The dependency-free reviewer showcase under `showcase/` presents the verified
+architecture, 15-step recovery trace, normative frame decoder, and explicit
+human/AI decision history without exposing any runtime service.
+
 ## Verified snapshot
 
 The implementation was verified locally on 2026-07-30:
@@ -124,6 +128,7 @@ not be claimed.
   hardware/transport, process interface, behavioral tests, and fuzz target.
 - `services/ingestion`: local metadata-only PDF ingestion worker.
 - `apps/diagnostics`: strict TypeScript console and real-process scenario.
+- `showcase`: static reviewer experience and browser/model contract tests.
 - `docs`: architecture, security, protocol, runbooks, demos, decisions, and
   observed AI-assisted verification.
 
