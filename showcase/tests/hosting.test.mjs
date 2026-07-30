@@ -25,4 +25,8 @@ test("hosting applies a restrictive browser policy", () => {
   assert.equal(headers["X-Content-Type-Options"], "nosniff");
   assert.equal(headers["Referrer-Policy"], "no-referrer");
   assert.equal(headers["X-Frame-Options"], "DENY");
+  assert.equal(
+    headers["Cache-Control"],
+    "public, max-age=0, must-revalidate",
+  );
 });
