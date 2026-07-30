@@ -4,11 +4,18 @@ Date: 2026-07-30
 
 ## Human specification
 
-Create a clean, local, C++-centered portfolio repository demonstrating a
+Create a clean, local, C++-centered portfolio artifact demonstrating a
 deterministic classroom edge controller, bounded authenticated byte-stream
 protocol, offline persistence and recovery, a hardened local Python PDF worker,
 a strict TypeScript diagnostic client, behavioral verification, and truthful AI
-provenance. Do not copy the private product, create a remote, deploy, or publish.
+provenance. Do not copy private product content into the artifact, create a
+remote, deploy, or publish.
+
+After Commit 5 the human amended placement: preserve the lab's focused history
+under `source-trace-edge-lab/` on a new branch of the original private
+`tatiana` repository and delete the standalone checkout. This superseded the
+earlier “original repository unchanged” instruction. The lab subtree remains
+the only portfolio boundary; the parent is not a publication candidate.
 
 ## Acceptance criteria
 

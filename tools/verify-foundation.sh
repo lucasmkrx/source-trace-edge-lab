@@ -2,28 +2,10 @@
 set -euo pipefail
 
 repository_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$repository_root"
 
-test "$(git rev-list --all --count)" -le 1
-test ! -e .git/shallow
-test -f LICENSE
-test -f AI_COLLABORATION.md
-test -f docs/publication-inventory.md
+test -f "$repository_root/LICENSE"
+test -f "$repository_root/AI_COLLABORATION.md"
+test -f "$repository_root/docs/publication-inventory.md"
 
-cmake --preset dev
-cmake --build --preset dev
-
-(
-  cd apps/diagnostics
-  npm run typecheck
-  npm test
-)
-
-if git grep -Ein \
-  'tatiana|firebasestorage|english grammar in use|stormy weather' \
-  -- ':!docs/publication-inventory.md'; then
-  echo "Forbidden private-project marker found" >&2
-  exit 1
-fi
-
-echo "Foundation verification passed"
+"$repository_root/tools/check-publication-scope.sh"
+echo "Foundation and current placement checks passed"

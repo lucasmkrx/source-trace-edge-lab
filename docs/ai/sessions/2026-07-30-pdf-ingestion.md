@@ -56,6 +56,24 @@ duplicate work, sensitive logging, and untruthful container claims.
   could be resubmitted, and the environment blocked restarting the GUI because
   its tool-usage limit had been reached.
 
+## Final-fixture container rerun
+
+The Phase 7 final pass restarted Docker Desktop, rebuilt the relocated source as
+image `sha256:d9d45f9f770492a09089ef0cff290b680edca1969b525024364e552172aecbba`,
+and submitted the exact committed final fixture. The first hardened launch
+exited because a non-root process could not create SQLite state in the default
+root-owned `/data` tmpfs. The rerun set explicit `mode=1777` on the bounded
+`/tmp` and `/data` tmpfs mounts.
+
+The successful container was inspected as UID/GID `10001:10001`, read-only
+root filesystem, and `CapDrop=["ALL"]`. `/healthz` returned OK. Ingestion
+returned one page, 113 text bytes, content SHA-256
+`5c6fe25f89e08fcef2520f8705793e16dfe645b7030e5028bbeddaae8f21bf88`,
+and text SHA-256
+`3f3eb065c496695905336270c40922aedabffee2ab0a0e2ae94468a2e980a23d`.
+The smoke container was then stopped and auto-removed. This closes the earlier
+final-byte rerun limitation.
+
 ## Residual risk
 
 Native PDF tooling remains a complex attack surface. Bounds and process

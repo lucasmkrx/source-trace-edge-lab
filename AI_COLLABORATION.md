@@ -1,7 +1,10 @@
 # AI collaboration policy
 
-This repository was created with material assistance from OpenAI Codex beginning
-on 2026-07-30. The human owner supplied the goals, constraints, architecture
+This lab was created with material assistance from OpenAI Codex beginning on
+2026-07-30. It began as a clean local sibling repository; the human later
+directed that its full focused history be imported under
+`tatiana/source-trace-edge-lab` on a new branch and that the standalone checkout
+be deleted. The human owner supplied the goals, constraints, architecture
 review, scope corrections, authorization, and publication boundaries. Codex
 proposed and implemented code and documentation subject to human review and
 behavioral verification.
@@ -32,3 +35,7 @@ evidence.
 
 Commits remain human-owned and locally approved. No Codex email address or
 fictional reviewer identity is used.
+
+The enclosing private repository is not claimed as AI-authored or safe to
+publish. Provenance and publication claims in this directory apply only to the
+lab subtree.

@@ -17,8 +17,8 @@ response expectation.
 
 ## Supported versions
 
-Only the current local `main` branch is considered during development. No
-published version is currently supported.
+Only the current local `codex/source-trace-edge-lab` development branch is
+considered for this snapshot. No published version is currently supported.
 
 ## Security boundaries
 
@@ -28,3 +28,5 @@ published version is currently supported.
 - A privileged local user can modify the controller database and executable.
 - The PDF worker is defense-in-depth demonstration code, not a complete
   hostile-document sandbox.
+- The enclosing `tatiana` repository is outside the lab's security and
+  publication boundary.

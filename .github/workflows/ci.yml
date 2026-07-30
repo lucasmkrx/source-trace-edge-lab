@@ -82,6 +82,12 @@ jobs:
         working-directory: apps/diagnostics
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install simulator dependencies
+        working-directory: .
+        run: sudo apt-get update && sudo apt-get install --yes ninja-build libsodium-dev libsqlite3-dev
+      - name: Build simulator for integration tests
+        working-directory: .
+        run: cmake --preset dev && cmake --build --preset dev --target sourcetrace_sim
       - uses: actions/setup-node@1e60f620b9541dca151540d0c3c8bf8521edb478 # v4.0.3
         with:
           node-version: "22"
@@ -89,4 +95,5 @@ jobs:
           cache-dependency-path: apps/diagnostics/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      - run: npm run build
       - run: npm test

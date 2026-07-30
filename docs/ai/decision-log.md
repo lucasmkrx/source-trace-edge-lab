@@ -13,3 +13,4 @@
 | 2026-07-30 | Use a strict TypeScript terminal client rather than a GUI in the MVP. | Human explicitly deferred Electron/Vue. | Accepted |
 | 2026-07-30 | Keep controller decisions in C++ and make TypeScript a validated diagnostic orchestrator with an independent wire inspector. | Confirmed with shared golden-vector and real-process tests. | Accepted |
 | 2026-07-30 | Import the completed lab history as a subtree of the original `tatiana` repository and delete the temporary standalone checkout. | Human explicitly replaced the sibling-repository instruction before Commit 6. | Human correction |
+| 2026-07-30 | Treat only the lab subtree as a future portfolio candidate and block publication of the enclosing repository. | Parent inspection found product code, cloud configuration, migration assets, and private material outside the subtree. | Accepted security boundary |

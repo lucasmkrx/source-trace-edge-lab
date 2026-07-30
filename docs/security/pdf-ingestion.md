@@ -53,8 +53,9 @@ work, and internal failure. Responses do not expose exception strings.
 
 The image is based on a digest-pinned official Python 3.12.13 Alpine image,
 installs Poppler from signed Alpine repositories, and runs as UID 10001. The
-container smoke test uses bounded 16 MiB `tmpfs` mounts for `/tmp` and `/data`.
-This also demonstrates that no persistent document artifact is required.
+container smoke test uses a read-only root filesystem, drops all capabilities,
+and mounts bounded 16 MiB writable `tmpfs` paths for `/tmp` and `/data`. This
+also demonstrates that no persistent document artifact is required.
 
 ## Known limits
 
