@@ -34,6 +34,13 @@ FetchContent_MakeAvailable(nlohmann_json)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SODIUM REQUIRED IMPORTED_TARGET libsodium)
 find_package(SQLite3 REQUIRED)
+if(TARGET SQLite3::SQLite3)
+  set(SOURCETRACE_SQLITE_TARGET SQLite3::SQLite3)
+elseif(TARGET SQLite::SQLite3)
+  set(SOURCETRACE_SQLITE_TARGET SQLite::SQLite3)
+else()
+  message(FATAL_ERROR "FindSQLite3 did not export a supported imported target")
+endif()
 
 add_library(
   sourcetrace_protocol
@@ -66,7 +73,7 @@ target_link_libraries(
   sourcetrace_runtime
   PUBLIC
     sourcetrace_protocol
-    SQLite3::SQLite3
+    ${SOURCETRACE_SQLITE_TARGET}
     sourcetrace_build_options
 )
 sourcetrace_enable_project_tidy(sourcetrace_runtime)
