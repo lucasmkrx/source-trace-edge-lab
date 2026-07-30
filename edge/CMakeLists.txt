@@ -33,6 +33,7 @@ FetchContent_MakeAvailable(nlohmann_json)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SODIUM REQUIRED IMPORTED_TARGET libsodium)
+find_package(SQLite3 REQUIRED)
 
 add_library(
   sourcetrace_protocol
@@ -53,6 +54,29 @@ target_link_libraries(
     PkgConfig::SODIUM
 )
 sourcetrace_enable_project_tidy(sourcetrace_protocol)
+
+add_library(
+  sourcetrace_runtime
+  src/runtime/controller_runtime.cpp
+  src/runtime/sqlite_store.cpp
+  simulator/fault_injection.cpp
+)
+target_include_directories(sourcetrace_runtime PUBLIC include)
+target_link_libraries(
+  sourcetrace_runtime
+  PUBLIC
+    sourcetrace_protocol
+    SQLite3::SQLite3
+    sourcetrace_build_options
+)
+sourcetrace_enable_project_tidy(sourcetrace_runtime)
+
+add_executable(sourcetrace_sim cli/main.cpp)
+target_link_libraries(
+  sourcetrace_sim
+  PRIVATE sourcetrace_runtime nlohmann_json::nlohmann_json sourcetrace_build_options
+)
+sourcetrace_enable_project_tidy(sourcetrace_sim)
 
 if(SOURCETRACE_BUILD_TESTS)
   FetchContent_Declare(
@@ -85,6 +109,13 @@ if(SOURCETRACE_BUILD_TESTS)
     PRIVATE SOURCETRACE_SOURCE_DIR="${PROJECT_SOURCE_DIR}"
   )
   catch_discover_tests(sourcetrace_protocol_tests)
+
+  add_executable(sourcetrace_runtime_tests tests/runtime_tests.cpp)
+  target_link_libraries(
+    sourcetrace_runtime_tests
+    PRIVATE sourcetrace_runtime Catch2::Catch2WithMain sourcetrace_build_options
+  )
+  catch_discover_tests(sourcetrace_runtime_tests)
 endif()
 
 if(SOURCETRACE_BUILD_FUZZER)

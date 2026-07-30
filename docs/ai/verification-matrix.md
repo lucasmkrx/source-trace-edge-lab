@@ -7,7 +7,7 @@
 | Repository foundation | Task 0001 | CMake configure/build; TypeScript typecheck; 1 test | Dependency audit: 0 vulnerabilities; publication marker scan passed | New repository had 0 inherited objects; foundation script and diff check passed | Reviewed |
 | Controller core | Task 0001 | 8 transition/replay/HAL tests passed twice | Warnings as errors; forbidden dependency search clean | Offline, storage-fault, and deterministic replay behavior reviewed | Reviewed |
 | Protocol | Task 0001 | 15 protocol tests within 23-test suite; ASan/UBSan 23/23; seeded fuzz 50,000 | Product clang-tidy passed; Ed25519/CRC/replay ordering reviewed | Golden vector matched; parser initialization defect found and fixed | Reviewed |
-| Persistence/recovery | Task 0001 | Pending | Pending | Pending | Pending |
+| Persistence/recovery | Task 0001 | 10 runtime tests within 33-test suite; ASan/UBSan 33/33 | Product clang-tidy passed; atomicity, bounds, retry, replay, and audit semantics reviewed | External CLI restart smoke test matched durable state and queue | Reviewed |
 | PDF worker | Task 0001 | Pending | Pending | Pending | Pending |
 | Diagnostic client | Task 0001 | Pending | Pending | Pending | Pending |
 | Reviewer evidence | Task 0001 | Pending | Pending | Pending | Pending |

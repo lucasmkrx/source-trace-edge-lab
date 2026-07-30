@@ -17,6 +17,7 @@ enum class ControllerMode : std::uint8_t {
 enum class Health : std::uint8_t {
   nominal,
   network_degraded,
+  queue_saturated,
   storage_fault,
 };
 
@@ -39,6 +40,9 @@ enum class AuditCode : std::uint8_t {
   connectivity_restored,
   storage_failed,
   storage_recovered,
+  queue_saturated,
+  queue_available,
+  remote_command_accepted,
   telemetry_due,
   time_regression,
 };
@@ -54,7 +58,14 @@ enum class RejectionReason : std::uint8_t {
   configuration_required,
   occupancy_required,
   storage_unavailable,
+  queue_unavailable,
   time_regression,
+};
+
+enum class CommandAction : std::uint8_t {
+  start_session,
+  stop_session,
+  request_status,
 };
 
 struct ControllerConfig {
@@ -115,9 +126,23 @@ struct StorageRecovered {
   bool operator==(const StorageRecovered &) const = default;
 };
 
+struct QueueCapacityReached {
+  bool operator==(const QueueCapacityReached &) const = default;
+};
+
+struct QueueCapacityAvailable {
+  bool operator==(const QueueCapacityAvailable &) const = default;
+};
+
+struct RemoteCommand {
+  CommandAction action;
+  bool operator==(const RemoteCommand &) const = default;
+};
+
 using EventData =
     std::variant<BootCompleted, OccupancyChanged, SessionButtonPressed, ConnectivityChanged,
-                 ConfigurationAccepted, Tick, StorageFailed, StorageRecovered>;
+                 ConfigurationAccepted, Tick, StorageFailed, StorageRecovered,
+                 QueueCapacityReached, QueueCapacityAvailable, RemoteCommand>;
 
 struct Event {
   std::uint64_t at_ms;

@@ -32,7 +32,8 @@ Indicator desiredIndicator(const ControllerState &state) {
   if (state.health == Health::storage_fault) {
     return Indicator::fault;
   }
-  if (state.health == Health::network_degraded || !state.configuration_valid) {
+  if (state.health == Health::network_degraded || state.health == Health::queue_saturated ||
+      !state.configuration_valid) {
     return Indicator::degraded;
   }
   if (state.mode == ControllerMode::session_active) {
@@ -91,6 +92,10 @@ Transition reduce(const ControllerState &current, const Event &event) {
             result.effects.push_back(
                 Effect{RejectInput{RejectionReason::storage_unavailable}, false});
             pushAudit(result.effects, AuditCode::input_rejected, false);
+          } else if (result.state.health == Health::queue_saturated) {
+            result.effects.push_back(
+                Effect{RejectInput{RejectionReason::queue_unavailable}, false});
+            pushAudit(result.effects, AuditCode::input_rejected);
           } else {
             result.state.mode = ControllerMode::session_active;
             changed = true;
@@ -100,7 +105,8 @@ Transition reduce(const ControllerState &current, const Event &event) {
         } else if constexpr (std::is_same_v<T, ConnectivityChanged>) {
           if (result.state.connected != data.connected) {
             result.state.connected = data.connected;
-            if (result.state.health != Health::storage_fault) {
+            if (result.state.health != Health::storage_fault &&
+                result.state.health != Health::queue_saturated) {
               result.state.health =
                   data.connected ? Health::nominal : Health::network_degraded;
             }
@@ -145,6 +151,66 @@ Transition reduce(const ControllerState &current, const Event &event) {
             changed = true;
             pushAudit(result.effects, AuditCode::storage_recovered);
             result.effects.push_back(Effect{QueueTelemetry{TelemetryReason::fault}, true});
+          }
+        } else if constexpr (std::is_same_v<T, QueueCapacityReached>) {
+          if (result.state.health != Health::storage_fault &&
+              result.state.health != Health::queue_saturated) {
+            result.state.health = Health::queue_saturated;
+            changed = true;
+            pushAudit(result.effects, AuditCode::queue_saturated);
+          }
+        } else if constexpr (std::is_same_v<T, QueueCapacityAvailable>) {
+          if (result.state.health == Health::queue_saturated) {
+            result.state.health =
+                result.state.connected ? Health::nominal : Health::network_degraded;
+            changed = true;
+            pushAudit(result.effects, AuditCode::queue_available);
+          }
+        } else if constexpr (std::is_same_v<T, RemoteCommand>) {
+          if (data.action == CommandAction::request_status) {
+            pushAudit(result.effects, AuditCode::remote_command_accepted,
+                      result.state.health != Health::storage_fault);
+            result.effects.push_back(Effect{QueueTelemetry{TelemetryReason::state_changed},
+                                            result.state.health != Health::storage_fault});
+          } else if (data.action == CommandAction::start_session) {
+            if (result.state.mode == ControllerMode::session_active) {
+              pushAudit(result.effects, AuditCode::remote_command_accepted,
+                        result.state.health != Health::storage_fault);
+            } else if (!result.state.configuration_valid) {
+              result.effects.push_back(
+                  Effect{RejectInput{RejectionReason::configuration_required}, false});
+              pushAudit(result.effects, AuditCode::input_rejected,
+                        result.state.health != Health::storage_fault);
+            } else if (result.state.configuration.occupancy_required_to_start &&
+                       !result.state.occupied) {
+              result.effects.push_back(
+                  Effect{RejectInput{RejectionReason::occupancy_required}, false});
+              pushAudit(result.effects, AuditCode::input_rejected,
+                        result.state.health != Health::storage_fault);
+            } else if (result.state.health == Health::storage_fault) {
+              result.effects.push_back(
+                  Effect{RejectInput{RejectionReason::storage_unavailable}, false});
+              pushAudit(result.effects, AuditCode::input_rejected, false);
+            } else if (result.state.health == Health::queue_saturated) {
+              result.effects.push_back(
+                  Effect{RejectInput{RejectionReason::queue_unavailable}, false});
+              pushAudit(result.effects, AuditCode::input_rejected);
+            } else {
+              result.state.mode = ControllerMode::session_active;
+              changed = true;
+              pushAudit(result.effects, AuditCode::remote_command_accepted);
+              result.effects.push_back(
+                  Effect{QueueTelemetry{TelemetryReason::state_changed}, true});
+            }
+          } else {
+            if (result.state.mode == ControllerMode::session_active) {
+              result.state.mode = ControllerMode::idle;
+              changed = true;
+              result.effects.push_back(Effect{QueueTelemetry{TelemetryReason::state_changed},
+                                              result.state.health != Health::storage_fault});
+            }
+            pushAudit(result.effects, AuditCode::remote_command_accepted,
+                      result.state.health != Health::storage_fault);
           }
         }
       },
