@@ -8,4 +8,6 @@
 | 2026-07-30 | Use Ed25519 for authenticated commands and CRC32 only for accidental corruption. | Approved in the implementation plan. | Accepted |
 | 2026-07-30 | Use one-writer SQLite rollback-journal persistence and describe retransmission plus idempotency instead of exactly-once delivery. | Approved in the implementation plan. | Accepted |
 | 2026-07-30 | Persist a five-attempt retry budget with explicit backoff per connection and reset it only on a connectivity-restored event. | Checked against the approved bounded-retry requirement and behavioral tests. | Accepted |
+| 2026-07-30 | Isolate PDF parsing and `pdftotext` in a resource-limited helper and return metadata rather than extracted document text. | Checked against the approved minimal local worker and privacy boundary. | Accepted |
+| 2026-07-30 | Replace the macOS worker-thread `asyncio` subprocess path after deadline tests exposed child-watcher stalling. | Behavioral failure drove a reviewed `Popen`/kill/reap correction. | Human/verification correction |
 | 2026-07-30 | Use a strict TypeScript terminal client rather than a GUI in the MVP. | Human explicitly deferred Electron/Vue. | Accepted |

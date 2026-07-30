@@ -19,7 +19,7 @@ SBOM.
 | TypeScript | Type checking and compilation | Apache-2.0 |
 
 Poppler's `pdftotext` executable is installed in the worker container under the
-licenses supplied by the Debian package. It is invoked as a separate process and
+licenses supplied by the Alpine package. It is invoked as a separate process and
 is not redistributed in source form by this repository.
 
 This file is an engineering inventory, not legal advice. The publication

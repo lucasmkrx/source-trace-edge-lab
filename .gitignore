@@ -8,7 +8,7 @@ CMakeUserPresets.json
 compile_commands.json
 
 # Python
-/.venv/
+**/.venv/
 **/__pycache__/
 *.py[cod]
 .pytest_cache/
@@ -27,6 +27,10 @@ htmlcov/
 *.sqlite-journal
 *.sqlite-wal
 *.sqlite-shm
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
 /diagnostics/
 /tmp/
 
