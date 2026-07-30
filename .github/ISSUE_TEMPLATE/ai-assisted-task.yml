@@ -1,0 +1,35 @@
+name: AI-assisted engineering task
+description: Define acceptance criteria and review evidence before implementation.
+title: "[task] "
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Human-authored goal
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Behavioral acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Security, reliability, and publication risks
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Planned verification commands
+    validations:
+      required: true
+  - type: input
+    id: session
+    attributes:
+      label: AI session record
+      placeholder: docs/ai/sessions/YYYY-MM-DD-topic.md
+    validations:
+      required: true

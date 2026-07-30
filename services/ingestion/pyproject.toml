@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sourcetrace-ingestion"
+version = "0.1.0"
+description = "Bounded local PDF ingestion worker for SourceTrace Edge Lab"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "fastapi==0.116.1",
+  "pydantic==2.11.7",
+  "pypdf==5.9.0",
+  "uvicorn==0.35.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx==0.28.1",
+  "mypy==1.17.1",
+  "pytest==8.4.1",
+  "pytest-cov==6.2.1",
+  "ruff==0.12.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sourcetrace_ingestion"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["sourcetrace_ingestion"]

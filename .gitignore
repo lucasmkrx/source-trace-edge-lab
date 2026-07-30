@@ -1,0 +1,54 @@
+# Build outputs
+/build/
+/build-*/
+/out/
+
+# CMake
+CMakeUserPresets.json
+compile_commands.json
+
+# Python
+/.venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node.js
+**/node_modules/
+**/dist/
+*.tsbuildinfo
+
+# Runtime state and diagnostics
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+/diagnostics/
+/tmp/
+
+# Environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/
+
+# Security-sensitive material
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.secrets.*
+
+# Test and container output
+coverage/
+test-results/
+*.log
