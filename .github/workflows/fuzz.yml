@@ -1,0 +1,25 @@
+name: Continuous Fuzzing
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fuzz:
+    name: Protocol Fuzzer
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Install native dependencies
+        run: sudo apt-get update && sudo apt-get install --yes ninja-build libsodium-dev libsqlite3-dev clang
+      - name: Configure
+        run: cmake --preset fuzz
+      - name: Build
+        run: cmake --build --preset fuzz
+      - name: Run Fuzzer
+        run: ./build/fuzz/sourcetrace_protocol_fuzz -max_total_time=300

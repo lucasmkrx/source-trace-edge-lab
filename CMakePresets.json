@@ -42,13 +42,24 @@
         "SOURCETRACE_BUILD_FUZZER": "ON",
         "SOURCETRACE_BUILD_TESTS": "OFF"
       }
+    },
+    {
+      "name": "coverage",
+      "inherits": "dev",
+      "binaryDir": "${sourceDir}/build/coverage",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "--coverage",
+        "CMAKE_EXE_LINKER_FLAGS": "--coverage",
+        "CMAKE_SHARED_LINKER_FLAGS": "--coverage"
+      }
     }
   ],
   "buildPresets": [
     { "name": "dev", "configurePreset": "dev" },
     { "name": "asan-ubsan", "configurePreset": "asan-ubsan" },
     { "name": "clang-tidy", "configurePreset": "clang-tidy" },
-    { "name": "fuzz", "configurePreset": "fuzz" }
+    { "name": "fuzz", "configurePreset": "fuzz" },
+    { "name": "coverage", "configurePreset": "coverage" }
   ],
   "testPresets": [
     {
@@ -59,6 +70,11 @@
     {
       "name": "asan-ubsan",
       "configurePreset": "asan-ubsan",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "coverage",
+      "configurePreset": "coverage",
       "output": { "outputOnFailure": true }
     }
   ]

@@ -1,5 +1,9 @@
 # SourceTrace Edge Lab
 
+[![Continuous Integration](https://github.com/lucasmkrx/source-trace-edge-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/lucasmkrx/source-trace-edge-lab/actions/workflows/ci.yml)
+[![Release](https://github.com/lucasmkrx/source-trace-edge-lab/actions/workflows/release.yml/badge.svg)](https://github.com/lucasmkrx/source-trace-edge-lab/actions/workflows/release.yml)
+[![codecov](https://codecov.io/gh/lucasmkrx/source-trace-edge-lab/graph/badge.svg)](https://codecov.io/gh/lucasmkrx/source-trace-edge-lab)
+
 SourceTrace Edge Lab is a local, C++20-centered systems portfolio prototype for
 a deterministic classroom edge terminal. It demonstrates bounded binary
 parsing, authenticated commands, replay protection, transactional offline

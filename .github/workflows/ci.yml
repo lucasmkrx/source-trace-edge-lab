@@ -28,6 +28,31 @@ jobs:
       - name: Test
         run: ctest --preset dev
 
+  cpp-coverage:
+    name: C++ Coverage
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Install native dependencies
+        run: sudo apt-get update && sudo apt-get install --yes ninja-build libsodium-dev libsqlite3-dev lcov
+      - name: Configure
+        run: cmake --preset coverage
+      - name: Build
+        run: cmake --build --preset coverage
+      - name: Test
+        run: ctest --preset coverage
+      - name: Generate coverage report
+        run: |
+          lcov --capture --directory build/coverage --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' '*/tests/*' '*/fuzz/*' '*/_deps/*' --output-file coverage.info
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.info
+          flags: cpp
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   cpp-macos:
     name: C++ macOS
     runs-on: macos-14
@@ -71,7 +96,13 @@ jobs:
       - run: python -m pip install --disable-pip-version-check -e '.[dev]'
       - run: ruff check .
       - run: mypy src
-      - run: pytest
+      - run: pytest --cov=sourcetrace_ingestion --cov-report=xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: services/ingestion/coverage.xml
+          flags: python
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   typescript:
     name: TypeScript diagnostics
