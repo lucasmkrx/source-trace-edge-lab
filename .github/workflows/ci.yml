@@ -44,8 +44,8 @@ jobs:
         run: ctest --preset coverage
       - name: Generate coverage report
         run: |
-          lcov --capture --directory build/coverage --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' '*/tests/*' '*/fuzz/*' '*/_deps/*' --output-file coverage.info
+          lcov --capture --directory build/coverage --ignore-errors mismatch --ignore-errors inconsistent --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' '*/tests/*' '*/fuzz/*' '*/_deps/*' --ignore-errors mismatch --ignore-errors inconsistent --ignore-errors unused --output-file coverage.info
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
