@@ -102,6 +102,14 @@ npm test
 npm run scenario
 ```
 
+Launch the rich Desktop Viewer (Electron + Vue.js):
+
+```sh
+cd apps/viewer
+npm ci
+npm run dev
+```
+
 Run the worker checks:
 
 ```sh
@@ -138,6 +146,7 @@ not be claimed.
   hardware/transport, process interface, behavioral tests, and fuzz target.
 - `services/ingestion`: local metadata-only PDF ingestion worker.
 - `apps/diagnostics`: strict TypeScript console and real-process scenario.
+- `apps/viewer`: Rich Electron+Vue.js desktop UI for hardware telemetry visualization.
 - `showcase`: static reviewer experience and browser/model contract tests.
 - `docs`: architecture, security, protocol, runbooks, demos, decisions, and
   observed AI-assisted verification.
