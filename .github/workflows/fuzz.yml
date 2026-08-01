@@ -22,4 +22,4 @@ jobs:
       - name: Build
         run: cmake --build --preset fuzz
       - name: Run Fuzzer
-        run: ./build/fuzz/sourcetrace_protocol_fuzz -max_total_time=300
+        run: ./build/fuzz/edge/sourcetrace_protocol_fuzz -max_total_time=300
