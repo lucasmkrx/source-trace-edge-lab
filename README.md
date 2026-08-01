@@ -18,6 +18,31 @@ architecture, 15-step recovery trace, normative frame decoder, and explicit
 human/AI decision history without exposing any runtime service.
 
 The public deployment is intentionally static. Its configuration deploys only
+showcase/public/; the controller, worker, database, fixtures, and credentials
+remain source or local test artifacts.
+
+If you find issues with our deterministic runtime or telemetry payloads, please
+open an issue or PR. We expect zero data loss in the presence of connection
+failures or arbitrary process terminations.
+
+## AI Agent Integration (MCP)
+
+This repository includes a native Model Context Protocol (MCP) server that allows AI Assistants (like Claude Desktop or Cursor) to directly control and monitor the C++ Edge Simulator in real-time.
+
+To configure Claude Desktop to talk to the simulator, add the following to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "sourcetrace-edge": {
+      "command": "node",
+      "args": ["/absolute/path/to/source-trace-edge-lab-public/apps/mcp-server/dist/index.js"]
+    }
+  }
+}
+```
+
+Once configured, you can simply ask your AI agent to "Boot the edge terminal and press the hardware button", and it will autonomously invoke the tools that spin up the C++ engine! deploys only
 `showcase/public/`; the controller, worker, database, fixtures, and credentials
 remain source or local test artifacts.
 
@@ -110,6 +135,15 @@ npm ci
 npm run dev
 ```
 
+Run the AI Model Context Protocol (MCP) Server:
+
+```sh
+cd apps/mcp-server
+npm ci
+npm run build
+npm start
+```
+
 Run the worker checks:
 
 ```sh
@@ -147,6 +181,7 @@ not be claimed.
 - `services/ingestion`: local metadata-only PDF ingestion worker.
 - `apps/diagnostics`: strict TypeScript console and real-process scenario.
 - `apps/viewer`: Rich Electron+Vue.js desktop UI for hardware telemetry visualization.
+- `apps/mcp-server`: Official MCP Server allowing AI agents to control the hardware.
 - `showcase`: static reviewer experience and browser/model contract tests.
 - `docs`: architecture, security, protocol, runbooks, demos, decisions, and
   observed AI-assisted verification.
