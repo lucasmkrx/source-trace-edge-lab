@@ -14,7 +14,7 @@
     "scenario": "node --import tsx src/cli.ts scenario"
   },
   "dependencies": {
-    "zod": "4.0.17"
+    "zod": "4.6.5"
   },
   "devDependencies": {
     "@types/node": "22.17.1",
